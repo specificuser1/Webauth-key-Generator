@@ -19,13 +19,17 @@ return res.json({error:`Wait ${time} minutes`})
 
 try{
 
+const axios = require("axios")
+
 let response = await axios.post("https://keyauth.win/api/1.2/",{
 type:"license",
 ownerid:process.env.OWNER_ID,
-name:process.env.APP_NAME
+name:process.env.APP_NAME,
+secret:process.env.SECRET,
+duration:6
 })
 
-let key = response.data.key
+let key = response.data.license
 
 cooldown[ip] = Date.now() + 6*60*60*1000
 
